@@ -10,12 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="historia-page">
 <header>
   <div class="container nav">
-    <a class="logo-btn" href="INDEX.HTML" aria-label="Ir al inicio">
-      <img src="logo.png" alt="Logo Los Tuneritos">
-    </a>
+    <div class="logo-stack">
+      <a class="logo-btn" href="INDEX.HTML" aria-label="Ir al inicio">
+        <img src="logo.png" alt="Logo Los Tuneritos">
+      </a>
+      <p class="logo-microcopy">Gomitas artesanales de melón · Zacapa, Guatemala</p>
+    </div>
 
     <nav class="menu" aria-label="Navegacion principal">
       <a href="INDEX.HTML">Inicio</a>
@@ -26,23 +29,57 @@
   </div>
 </header>
 
-<section class="page active" id="historia">
-  <div class="container grid-2">
-    <div class="section-copy">
-      <span class="tagline">Nuestra raiz</span>
-      <h2>Historia de la empresa</h2>
-      <p>Aqui puedes escribir como nace tu marca y que la hace diferente.</p>
-      <p><strong>Misión:</strong> Elaborar y comercializar gomitas artesanales a base de melón, utilizando ingredientes naturales y procesos de calidad, ofreciendo a nuestros clientes una alternativa innovadora, saludable y deliciosa. Nos enfocamos en brindar una excelente experiencia de compra a través de plataformas digitales, garantizando frescura, accesibilidad y satisfacción en cada producto.</p>
-      <p><strong>Visión:</strong> Ser una marca reconocida a nivel nacional por la innovación en snacks saludables, destacando por nuestras gomitas de melón y la calidad de nuestros productos. Aspiramos a expandirnos en el mercado digital y físico, posicionándonos como una de las principales opciones en dulces naturales en Guatemala.</p>
-      <p><strong>Valores:</strong> Calidad en cada producto, frescura garantizada, innovación constante, compromiso con ingredientes naturales, orgullo chapín y cercanía con nuestros clientes.</p>
-    </div>
-
-    <div class="box-img">
-      <img src="nombre-producto.png" alt="Historia de la empresa">
-    </div>
+<section class="page active historia-section" id="historia">
+  <div class="historia-bg" aria-hidden="true">
+    <span class="bg-blob blob-left" data-parallax="-0.18"></span>
+    <span class="bg-blob blob-right" data-parallax="0.14"></span>
+    <span class="bg-circle circle-one" data-parallax="-0.1"></span>
+    <span class="bg-circle circle-two" data-parallax="0.08"></span>
+    <span class="bg-melon melon-one" data-parallax="0.06"></span>
+    <span class="bg-melon melon-two" data-parallax="-0.05"></span>
+    <span class="bg-leaf leaf-one" data-parallax="0.1"></span>
+    <span class="bg-leaf leaf-two" data-parallax="-0.08"></span>
+    <span class="bg-curve curve-one"></span>
+    <span class="bg-curve curve-two"></span>
+    <span class="bg-textile textile-left"></span>
+    <span class="bg-textile textile-right"></span>
   </div>
 
-  <div class="container">
+  <div class="container historia-shell">
+    <article class="historia-main reveal-on-scroll" data-delay="0">
+      <span class="tagline">Nuestra raiz</span>
+      <h2>Historia de la empresa</h2>
+      <div class="historia-copy-flow">
+        <p>Los Tuneritos nacio en Zacapa, Guatemala, como una idea creada por un grupo de jovenes estudiantes de la Universidad Mariano Galvez, quienes buscaban desarrollar un emprendimiento innovador que representara el sabor, la creatividad y el orgullo de su tierra.</p>
+        <p>Inspirados por el clima calido de Zacapa y por el sabor refrescante del melon, decidimos crear unas gomitas artesanales diferentes: dulces, suaves y con un toque natural que pudiera disfrutarse en cualquier momento. Al inicio, el proyecto comenzo como una propuesta universitaria, pero poco a poco se convirtio en una oportunidad para demostrar que los jovenes tambien pueden crear productos de calidad con identidad guatemalteca.</p>
+        <p>Nuestro objetivo fue elaborar gomitas a base de melon utilizando ingredientes seleccionados y procesos cuidadosos, buscando ofrecer una alternativa deliciosa, fresca e innovadora para nuestros clientes. Desde el principio, nos enfocamos en que cada producto transmitiera calidad, buen sabor y una experiencia agradable de compra, apoyandonos tambien en plataformas digitales para llegar a mas personas.</p>
+        <p>Hoy, Los Tuneritos representa el esfuerzo, la union y la vision emprendedora de jovenes zacapanecos que desean posicionar una marca guatemalteca a nivel nacional. Aspiramos a seguir creciendo en el mercado digital y fisico, destacando por nuestras gomitas de melon, nuestra creatividad y el compromiso de ofrecer un producto saludable, accesible y lleno de sabor.</p>
+      </div>
+    </article>
+
+    <aside class="historia-brand reveal-on-scroll" data-delay="80">
+      <div class="historia-brand-media">
+        <img src="nombre-producto.png" alt="Historia de la empresa">
+      </div>
+    </aside>
+
+    <section class="historia-pillars-grid" aria-label="Mision, Vision y Valores">
+      <article class="pillar reveal-on-scroll" data-delay="120">
+        <h3>Mision</h3>
+        <p>Elaborar y comercializar gomitas artesanales a base de melon con ingredientes seleccionados y procesos de calidad, brindando una experiencia deliciosa, innovadora y accesible.</p>
+      </article>
+      <article class="pillar reveal-on-scroll" data-delay="180">
+        <h3>Vision</h3>
+        <p>Posicionar una marca guatemalteca reconocida a nivel nacional por la innovacion en snacks saludables y por la calidad de nuestras gomitas de melon.</p>
+      </article>
+      <article class="pillar reveal-on-scroll" data-delay="240">
+        <h3>Valores</h3>
+        <p>Calidad, frescura, innovacion constante, orgullo chapin y cercania con nuestros clientes en cada etapa del producto.</p>
+      </article>
+    </section>
+  </div>
+
+  <div class="container historia-nav reveal-on-scroll" data-delay="280">
     <div class="nav-buttons">
       <a class="btn" href="PRODUCTOS.HTML">&larr; Anterior</a>
       <a class="btn" href="COSECHA.HTML">Siguiente &rarr;</a>

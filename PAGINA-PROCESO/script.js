@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setActiveNavigation(navLinks, currentPage);
   enablePageTransitions(internalLinks, currentPage);
   enableHeaderResponsiveScroll();
+  enableHistoriaEffects();
 });
 
 function getCurrentPageName() {
@@ -94,6 +95,98 @@ function enableHeaderResponsiveScroll() {
   };
 
   onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+}
+
+function enableHistoriaEffects() {
+  enableDecorParallax();
+
+  if (!document.body.classList.contains("historia-page")) {
+    return;
+  }
+
+  enableHistoriaRevealOnScroll();
+}
+
+function enableHistoriaRevealOnScroll() {
+  const revealItems = document.querySelectorAll(".reveal-on-scroll");
+  if (revealItems.length === 0) {
+    return;
+  }
+
+  revealItems.forEach((item) => {
+    const delay = Number(item.getAttribute("data-delay") || 0);
+    item.style.setProperty("--reveal-delay", `${delay}ms`);
+  });
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.16,
+      rootMargin: "0px 0px -10% 0px",
+    }
+  );
+
+  revealItems.forEach((item) => observer.observe(item));
+}
+
+function enableDecorParallax() {
+  const ornaments = Array.from(document.querySelectorAll(".historia-bg [data-parallax]"))
+    .map((el) => ({ el, section: el.closest(".page") }))
+    .filter((item) => item.section);
+
+  if (ornaments.length === 0) {
+    return;
+  }
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    return;
+  }
+
+  let ticking = false;
+
+  const update = () => {
+    ornaments.forEach(({ el, section }) => {
+      const rect = section.getBoundingClientRect();
+      const sectionCenterOffset = rect.top + rect.height * 0.5 - window.innerHeight * 0.5;
+      const normalized = Math.max(-1, Math.min(1, sectionCenterOffset / window.innerHeight));
+      const factor = Number(el.getAttribute("data-parallax") || 0);
+      const y = normalized * factor * -42;
+      const x = normalized * factor * 16;
+      el.style.setProperty("--parallax-y", `${y.toFixed(2)}px`);
+      el.style.setProperty("--parallax-x", `${x.toFixed(2)}px`);
+    });
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  update();
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
 }
