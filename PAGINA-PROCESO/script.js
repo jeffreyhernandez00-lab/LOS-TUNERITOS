@@ -276,6 +276,18 @@ function enableOrderSystem() {
     renderOrder();
   });
 
+  whatsappBtn.addEventListener("click", (event) => {
+    if (whatsappBtn.classList.contains("disabled") || cart.size === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    window.setTimeout(() => {
+      cart.clear();
+      renderOrder();
+    }, 250);
+  });
+
   renderOrder();
 
   function renderOrder() {
