@@ -46,34 +46,79 @@
   </div>
 
   <div class="container section-panel">
-    <h2>Productos</h2>
-    <p>Explora nuestras distintas presentaciones de gomitas de melón, diseñadas para ofrecer una experiencia única en cada sabor. Calidad, frescura y un toque especial en cada producto.</p>
+    <div class="section-heading-row">
+      <h2>Productos</h2>
+      <span class="order-counter-pill" id="orderCounterPill">0 productos en tu pedido</span>
+    </div>
+    <p>Explora nuestras distintas presentaciones de gomitas de melón, diseñadas para ofrecer una experiencia única en cada sabor. Cada producto tiene un precio fijo de Q.15.00.</p>
 
-    <div class="cards">
-      <article class="card">
+    <div class="cards product-cards">
+      <article class="card product-card" data-product-id="original" data-product-name="Melon Gummies Original" data-price="15">
+        <span class="price-badge">Q.15.00</span>
         <img class="product-pack" style="--pack-scale:1;" src="producto.png" alt="Melon Gummies Original">
         <div class="txt">
           <h3>Melon Gummies Original</h3>
           <p>Dulzura que refresca cada momento.</p>
         </div>
+        <div class="product-card-actions">
+          <button class="btn btn-order add-to-order-btn" type="button" aria-label="Agregar Melon Gummies Original al pedido">Agregar al pedido</button>
+        </div>
       </article>
 
-      <article class="card">
+      <article class="card product-card" data-product-id="picante" data-product-name="Melon Gummies Picantes" data-price="15">
+        <span class="price-badge">Q.15.00</span>
         <img class="product-pack" style="--pack-scale:0.72;" src="PRODUCTOPICANTE_CLEAN.png" alt="Melon Gummies Picantes">
         <div class="txt"> 
           <h3>Melon Gummies Picantes</h3>
           <p>El toque que enciende tu antojo.</p>
         </div>
+        <div class="product-card-actions">
+          <button class="btn btn-order add-to-order-btn" type="button" aria-label="Agregar Melon Gummies Picantes al pedido">Agregar al pedido</button>
+        </div>
       </article>
 
-      <article class="card">
+      <article class="card product-card" data-product-id="agridulce" data-product-name="Melon Gummies Agridulces" data-price="15">
+        <span class="price-badge">Q.15.00</span>
         <img class="product-pack" style="--pack-scale:0.72;" src="PRODUCTOAGRIDULCE_CLEAN.png" alt="Melon Gummies Agridulces">
         <div class="txt">
           <h3>Melon Gummies Agridulces</h3>
           <p>El equilibrio perfecto de sabor.</p>
         </div>
+        <div class="product-card-actions">
+          <button class="btn btn-order add-to-order-btn" type="button" aria-label="Agregar Melon Gummies Agridulces al pedido">Agregar al pedido</button>
+        </div>
       </article>
     </div>
+
+    <section class="order-panel" id="pedidoApp" data-whatsapp="50200000000" aria-label="Sistema de pedidos">
+      <div class="order-panel-head">
+        <h3>Sistema de pedidos</h3>
+        <p>Agrega productos, ajusta cantidades y envía tu pedido por WhatsApp en segundos.</p>
+      </div>
+
+      <div class="order-grid">
+        <div class="order-items-wrap">
+          <p class="pedido-empty" id="pedidoEmpty">Aún no agregas productos a tu pedido.</p>
+          <ul class="pedido-items" id="pedidoItems" aria-live="polite"></ul>
+        </div>
+
+        <aside class="order-summary">
+          <h4>Resumen del pedido</h4>
+          <div class="summary-row">
+            <span>Productos</span>
+            <strong id="totalItems">0</strong>
+          </div>
+          <div class="summary-row">
+            <span>Total general</span>
+            <strong id="totalPrice">Q.0.00</strong>
+          </div>
+          <a class="btn whatsapp-btn disabled" id="whatsappOrderBtn" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">
+            Enviar pedido por WhatsApp
+          </a>
+          <p class="order-note">Puedes cambiar el número de WhatsApp en el atributo <code>data-whatsapp</code> del bloque de pedido.</p>
+        </aside>
+      </div>
+    </section>
 
     <div class="nav-buttons">
       <a class="btn" href="INDEX.HTML">&larr; Inicio</a>

@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   enablePageTransitions(internalLinks, currentPage);
   enableHeaderResponsiveScroll();
   enableHistoriaEffects();
+  enableOrderSystem();
 });
 
 function getCurrentPageName() {
@@ -189,4 +190,177 @@ function enableDecorParallax() {
   update();
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
+}
+
+function enableOrderSystem() {
+  const orderApp = document.getElementById("pedidoApp");
+  if (!orderApp) {
+    return;
+  }
+
+  const productCards = Array.from(document.querySelectorAll(".product-card"));
+  const orderList = document.getElementById("pedidoItems");
+  const emptyState = document.getElementById("pedidoEmpty");
+  const totalItemsEl = document.getElementById("totalItems");
+  const totalPriceEl = document.getElementById("totalPrice");
+  const counterPill = document.getElementById("orderCounterPill");
+  const whatsappBtn = document.getElementById("whatsappOrderBtn");
+  const whatsappNumber = sanitizePhone(orderApp.dataset.whatsapp || "");
+
+  if (!orderList || !emptyState || !totalItemsEl || !totalPriceEl || !counterPill || !whatsappBtn) {
+    return;
+  }
+
+  const cart = new Map();
+
+  productCards.forEach((card) => {
+    const addBtn = card.querySelector(".add-to-order-btn");
+    if (!addBtn) {
+      return;
+    }
+
+    addBtn.addEventListener("click", () => {
+      const item = readProductData(card);
+      if (!item) {
+        return;
+      }
+
+      const existing = cart.get(item.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.set(item.id, { ...item, quantity: 1 });
+      }
+
+      renderOrder();
+    });
+  });
+
+  orderList.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) {
+      return;
+    }
+
+    const actionButton = target.closest("[data-action]");
+    if (!(actionButton instanceof HTMLElement)) {
+      return;
+    }
+
+    const action = actionButton.getAttribute("data-action");
+    const productId = actionButton.getAttribute("data-product-id");
+    if (!action || !productId || !cart.has(productId)) {
+      return;
+    }
+
+    const item = cart.get(productId);
+    if (!item) {
+      return;
+    }
+
+    if (action === "increase") {
+      item.quantity += 1;
+    }
+
+    if (action === "decrease") {
+      item.quantity -= 1;
+      if (item.quantity <= 0) {
+        cart.delete(productId);
+      }
+    }
+
+    if (action === "remove") {
+      cart.delete(productId);
+    }
+
+    renderOrder();
+  });
+
+  renderOrder();
+
+  function renderOrder() {
+    const items = Array.from(cart.values());
+    const hasItems = items.length > 0;
+
+    emptyState.style.display = hasItems ? "none" : "block";
+    orderList.innerHTML = hasItems ? items.map(renderItem).join("") : "";
+
+    const totals = items.reduce(
+      (acc, item) => {
+        const lineTotal = item.price * item.quantity;
+        acc.items += item.quantity;
+        acc.total += lineTotal;
+        return acc;
+      },
+      { items: 0, total: 0 }
+    );
+
+    totalItemsEl.textContent = String(totals.items);
+    totalPriceEl.textContent = formatCurrency(totals.total);
+    counterPill.textContent = `${totals.items} ${totals.items === 1 ? "producto" : "productos"} en tu pedido`;
+    whatsappBtn.classList.toggle("disabled", !hasItems || !whatsappNumber);
+    whatsappBtn.setAttribute("aria-disabled", (!hasItems || !whatsappNumber) ? "true" : "false");
+    whatsappBtn.href = hasItems && whatsappNumber ? createWhatsAppLink(items, totals.total, whatsappNumber) : "#";
+  }
+}
+
+function readProductData(card) {
+  const id = card.getAttribute("data-product-id");
+  const name = card.getAttribute("data-product-name");
+  const price = Number(card.getAttribute("data-price"));
+
+  if (!id || !name || Number.isNaN(price)) {
+    return null;
+  }
+
+  return { id, name, price };
+}
+
+function renderItem(item) {
+  const subtotal = item.price * item.quantity;
+  return `
+    <li class="pedido-item">
+      <div class="pedido-item-main">
+        <h5>${escapeHtml(item.name)}</h5>
+        <p>Unitario: <strong>${formatCurrency(item.price)}</strong> | Subtotal: <strong>${formatCurrency(subtotal)}</strong></p>
+      </div>
+      <div class="pedido-item-actions">
+        <div class="qty-controls" aria-label="Controles de cantidad para ${escapeHtml(item.name)}">
+          <button type="button" class="qty-btn" data-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Disminuir cantidad">-</button>
+          <span class="qty-value" aria-live="polite">${item.quantity}</span>
+          <button type="button" class="qty-btn" data-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Aumentar cantidad">+</button>
+        </div>
+        <button type="button" class="item-remove-btn" data-action="remove" data-product-id="${escapeHtml(item.id)}">Eliminar</button>
+      </div>
+    </li>
+  `;
+}
+
+function createWhatsAppLink(items, grandTotal, whatsappNumber) {
+  const header = "Hola, quiero realizar este pedido de Los Tuneritos - Melon Gummies:";
+  const lines = items.map((item) => {
+    const lineTotal = item.price * item.quantity;
+    return `- ${item.name} | Cantidad: ${item.quantity} | Unitario: ${formatCurrency(item.price)} | Total: ${formatCurrency(lineTotal)}`;
+  });
+
+  const footer = `Total general del pedido: ${formatCurrency(grandTotal)}`;
+  const message = [header, "", ...lines, "", footer].join("\n");
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+function sanitizePhone(phone) {
+  return String(phone).replace(/[^\d]/g, "");
+}
+
+function formatCurrency(amount) {
+  return `Q.${Number(amount).toFixed(2)}`;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
