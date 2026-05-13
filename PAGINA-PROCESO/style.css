@@ -1747,30 +1747,48 @@ footer {
 
 @media (max-width: 520px) {
   header {
-    --logo-max: 78px;
-    --logo-min: 68px;
-    --nav-max: 96px;
-    --nav-min: 86px;
-    --line-max: 5px;
-    --line-min: 4px;
+    --logo-max: 56px;
+    --logo-min: 50px;
+    --nav-max: 66px;
+    --nav-min: 60px;
+    --line-max: 4px;
+    --line-min: 3px;
   }
 
   .nav {
-    gap: 6px;
-    padding: 6px 0 8px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0 7px;
   }
 
   .logo-microcopy {
     display: none;
   }
 
+  .logo-stack {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .logo-btn {
+    border-radius: 12px;
+  }
+
+  .logo-btn img {
+    border-radius: 10px;
+  }
+
   .menu {
-    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 5px;
     overflow-x: auto;
-    padding: 0 2px 4px;
+    padding: 2px 1px 4px;
     scrollbar-width: none;
   }
 
@@ -1782,9 +1800,9 @@ footer {
   .menu a {
     flex: 0 0 auto;
     width: auto;
-    min-height: 2.1rem;
-    padding: 0.55rem 0.78rem;
-    font-size: 0.86rem;
+    min-height: 1.9rem;
+    padding: 0.46rem 0.62rem;
+    font-size: 0.78rem;
     text-align: center;
   }
 
