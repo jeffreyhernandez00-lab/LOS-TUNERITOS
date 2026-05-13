@@ -1555,12 +1555,12 @@ footer {
 
 @media (max-width: 900px) {
   header {
-    --logo-max: 136px;
-    --logo-min: 122px;
-    --nav-max: 142px;
-    --nav-min: 128px;
-    --line-max: 9px;
-    --line-min: 6px;
+    --logo-max: 112px;
+    --logo-min: 96px;
+    --nav-max: 116px;
+    --nav-min: 104px;
+    --line-max: 7px;
+    --line-min: 5px;
   }
 
   .page {
@@ -1595,13 +1595,14 @@ footer {
 
   .menu {
     justify-content: center;
+    gap: 8px;
   }
 
   .nav {
     flex-direction: column;
     justify-content: center;
-    gap: 12px;
-    padding: 10px 0 16px;
+    gap: 8px;
+    padding: 8px 0 12px;
   }
 
   .logo-stack {
@@ -1610,7 +1611,7 @@ footer {
 
   .logo-microcopy {
     max-width: 96%;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
   }
 
   .historia-shell {
@@ -1745,9 +1746,45 @@ footer {
 }
 
 @media (max-width: 520px) {
+  header {
+    --logo-max: 78px;
+    --logo-min: 68px;
+    --nav-max: 96px;
+    --nav-min: 86px;
+    --line-max: 5px;
+    --line-min: 4px;
+  }
+
+  .nav {
+    gap: 6px;
+    padding: 6px 0 8px;
+  }
+
+  .logo-microcopy {
+    display: none;
+  }
+
+  .menu {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 0 2px 4px;
+    scrollbar-width: none;
+  }
+
+  .menu::-webkit-scrollbar {
+    display: none;
+  }
+
   .menu button,
   .menu a {
-    width: 100%;
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 2.1rem;
+    padding: 0.55rem 0.78rem;
+    font-size: 0.86rem;
     text-align: center;
   }
 
@@ -1785,10 +1822,6 @@ footer {
   .cosecha-steps-grid,
   .cosecha-quality-grid {
     grid-template-columns: 1fr;
-  }
-
-  .logo-microcopy {
-    font-size: 0.71rem;
   }
 
   .historia-pillars-grid {
