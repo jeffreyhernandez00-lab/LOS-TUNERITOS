@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   enableHeaderResponsiveScroll();
   enableHistoriaEffects();
   enableOrderSystem();
+  enableHarvestTopics();
 });
 
 function getCurrentPageName() {
@@ -314,6 +315,66 @@ function enableOrderSystem() {
     whatsappBtn.setAttribute("aria-disabled", (!hasItems || !whatsappNumber) ? "true" : "false");
     whatsappBtn.href = hasItems && whatsappNumber ? createWhatsAppLink(items, totals.total, whatsappNumber) : "#";
   }
+}
+
+function enableHarvestTopics() {
+  const topicCard = document.getElementById("harvestTopicCard");
+  const buttons = Array.from(document.querySelectorAll(".harvest-tag-btn"));
+
+  if (!topicCard || buttons.length === 0) {
+    return;
+  }
+
+  const image = topicCard.querySelector("img");
+  const title = topicCard.querySelector("h4");
+  const text = topicCard.querySelector("p");
+
+  if (!image || !title || !text) {
+    return;
+  }
+
+  const topics = {
+    campo: {
+      title: "Campo",
+      text: "El melón nace en tierra cálida, con sol y surcos que ayudan al crecimiento del cultivo.",
+      image: "cosecha-img/campo-melon.jpg",
+      alt: "Campo de melón en cultivo",
+    },
+    frescura: {
+      title: "Frescura",
+      text: "Se eligen frutos con buen color, aroma y textura para conservar un sabor natural.",
+      image: "cosecha-img/melon-fresco.jpg",
+      alt: "Melón fresco cortado",
+    },
+    calidad: {
+      title: "Calidad",
+      text: "Cada melón se revisa antes de transformarse en gomitas dulces y orgullosamente chapinas.",
+      image: "cosecha-img/seleccion-melones.jpg",
+      alt: "Melones seleccionados por calidad",
+    },
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const topicKey = button.dataset.harvestTopic;
+      const topic = topics[topicKey];
+
+      if (!topic) {
+        return;
+      }
+
+      buttons.forEach((item) => {
+        const isActive = item === button;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      image.src = topic.image;
+      image.alt = topic.alt;
+      title.textContent = topic.title;
+      text.textContent = topic.text;
+    });
+  });
 }
 
 function readProductData(card) {
