@@ -322,8 +322,11 @@ function enableHarvestTopics() {
   const image = document.getElementById("harvestFeatureImage");
   const title = document.getElementById("harvestTopicTitle");
   const text = document.getElementById("harvestTopicText");
+  const kicker = document.getElementById("harvestTopicKicker");
+  const caption = document.getElementById("harvestFeatureCaption");
+  const summary = document.querySelector(".harvest-summary");
 
-  if (!image || !title || !text || buttons.length === 0) {
+  if (!image || !title || !text || !kicker || !caption || !summary || buttons.length === 0) {
     return;
   }
 
@@ -333,18 +336,24 @@ function enableHarvestTopics() {
       text: "El melón nace en tierra cálida, con sol y surcos que ayudan al crecimiento del cultivo.",
       image: "cosecha-img/campo-melon.jpg",
       alt: "Campo de cultivo de melón con surcos verdes",
+      kicker: "Origen",
+      caption: "Cultivo de melón",
     },
     frescura: {
       title: "Frescura",
       text: "Se eligen frutos con buen color, aroma y textura para conservar un sabor natural.",
       image: "cosecha-img/melon-fresco.jpg",
       alt: "Melón fresco cortado",
+      kicker: "Sabor natural",
+      caption: "Melón fresco",
     },
     calidad: {
       title: "Calidad",
       text: "Cada melón se revisa antes de transformarse en gomitas dulces y orgullosamente chapinas.",
       image: "cosecha-img/seleccion-melones.jpg",
       alt: "Melones seleccionados por calidad",
+      kicker: "Selección",
+      caption: "Revisión y calidad",
     },
   };
 
@@ -363,10 +372,20 @@ function enableHarvestTopics() {
         item.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
 
-      image.src = topic.image;
-      image.alt = topic.alt;
-      title.textContent = topic.title;
-      text.textContent = topic.text;
+      image.classList.add("is-changing");
+      summary.classList.add("is-changing");
+
+      window.setTimeout(() => {
+        image.src = topic.image;
+        image.alt = topic.alt;
+        caption.textContent = topic.caption;
+        kicker.textContent = topic.kicker;
+        title.textContent = topic.title;
+        text.textContent = topic.text;
+
+        image.classList.remove("is-changing");
+        summary.classList.remove("is-changing");
+      }, 140);
     });
   });
 }
