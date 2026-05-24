@@ -318,18 +318,12 @@ function enableOrderSystem() {
 }
 
 function enableHarvestTopics() {
-  const topicCard = document.getElementById("harvestTopicCard");
   const buttons = Array.from(document.querySelectorAll(".harvest-tag-btn"));
+  const image = document.getElementById("harvestFeatureImage");
+  const title = document.getElementById("harvestTopicTitle");
+  const text = document.getElementById("harvestTopicText");
 
-  if (!topicCard || buttons.length === 0) {
-    return;
-  }
-
-  const image = topicCard.querySelector("img");
-  const title = topicCard.querySelector("h4");
-  const text = topicCard.querySelector("p");
-
-  if (!image || !title || !text) {
+  if (!image || !title || !text || buttons.length === 0) {
     return;
   }
 
@@ -338,7 +332,7 @@ function enableHarvestTopics() {
       title: "Campo",
       text: "El melón nace en tierra cálida, con sol y surcos que ayudan al crecimiento del cultivo.",
       image: "cosecha-img/campo-melon.jpg",
-      alt: "Campo de melón en cultivo",
+      alt: "Campo de cultivo de melón con surcos verdes",
     },
     frescura: {
       title: "Frescura",

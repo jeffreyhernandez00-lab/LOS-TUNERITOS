@@ -1541,39 +1541,6 @@ h3 {
   transform: translateY(-2px);
 }
 
-.harvest-topic-card {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
-  margin-top: 16px;
-  border-radius: 16px;
-  padding: 10px;
-  color: #2f261c;
-  background: rgba(255, 248, 232, 0.94);
-  box-shadow: 0 12px 22px rgba(30, 70, 34, 0.16);
-}
-
-.harvest-topic-card img {
-  width: 96px;
-  height: 82px;
-  display: block;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.harvest-topic-card h4 {
-  margin-bottom: 4px;
-  color: var(--verde-melon);
-  font-size: 1.05rem;
-}
-
-.harvest-topic-card p {
-  color: #594735;
-  font-size: 0.92rem;
-  line-height: 1.38;
-}
-
 .harvest-flow {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2159,15 +2126,6 @@ footer {
 
   .harvest-summary {
     border-radius: 18px;
-  }
-
-  .harvest-topic-card {
-    grid-template-columns: 1fr;
-  }
-
-  .harvest-topic-card img {
-    width: 100%;
-    height: 138px;
   }
 
   .harvest-card {
