@@ -331,25 +331,33 @@ function enableHarvestTopics() {
   }
 
   const topics = {
-    campo: {
-      title: "Campo",
-      text: "Surcos verdes, clima cálido y tierra fértil inspiran el origen de nuestras gomitas.",
+    zacapa: {
+      title: "Valle de La Fragua",
+      text: "El melón se asocia al clima cálido de oriente, donde el riego y el cuidado del suelo ayudan al cultivo.",
+      image: "cosecha-img/zacapa-motagua.jpg",
+      alt: "Paisaje cálido del valle de Zacapa, Guatemala",
+      kicker: "Zacapa, Guatemala",
+      caption: "Valle agrícola de Zacapa",
+    },
+    riego: {
+      title: "Riego",
+      text: "En el corredor seco, el agua se maneja con cuidado para mantener surcos productivos y frutos sanos.",
       image: "cosecha-img/campo-melon.jpg",
-      alt: "Campo de cultivo de melón con surcos verdes",
-      kicker: "Origen",
-      caption: "Cultivo de melón",
+      alt: "Campo de melón con surcos verdes y manejo de riego",
+      kicker: "La Fragua",
+      caption: "Surcos y manejo del agua",
     },
     frescura: {
       title: "Frescura",
-      text: "Hojas, fruto y pulpa fresca muestran el sabor natural del melón recién cosechado.",
+      text: "Hojas, guías y frutos muestran el desarrollo del melón antes del corte manual.",
       image: "cosecha-img/planta-con-melon.jpg",
       alt: "Melón creciendo entre hojas verdes",
-      kicker: "Sabor natural",
+      kicker: "Cultivo de melón",
       caption: "Melón en planta",
     },
     calidad: {
       title: "Calidad",
-      text: "La selección visual ayuda a elegir frutos con buen tamaño, color y textura.",
+      text: "La selección visual prioriza frutos con buen tamaño, color y textura para llegar al producto final.",
       image: "cosecha-img/seleccion-melones.jpg",
       alt: "Melones seleccionados por calidad",
       kicker: "Selección",
