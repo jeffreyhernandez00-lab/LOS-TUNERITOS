@@ -333,7 +333,7 @@ function enableHarvestTopics() {
   const topics = {
     campo: {
       title: "Campo",
-      text: "El melón nace en tierra cálida, con sol y surcos que ayudan al crecimiento del cultivo.",
+      text: "Surcos verdes, clima cálido y tierra fértil inspiran el origen de nuestras gomitas.",
       image: "cosecha-img/campo-melon.jpg",
       alt: "Campo de cultivo de melón con surcos verdes",
       kicker: "Origen",
@@ -341,15 +341,15 @@ function enableHarvestTopics() {
     },
     frescura: {
       title: "Frescura",
-      text: "Se eligen frutos con buen color, aroma y textura para conservar un sabor natural.",
-      image: "cosecha-img/melon-fresco.jpg",
-      alt: "Melón fresco cortado",
+      text: "Hojas, fruto y pulpa fresca muestran el sabor natural del melón recién cosechado.",
+      image: "cosecha-img/planta-con-melon.jpg",
+      alt: "Melón creciendo entre hojas verdes",
       kicker: "Sabor natural",
-      caption: "Melón fresco",
+      caption: "Melón en planta",
     },
     calidad: {
       title: "Calidad",
-      text: "Cada melón se revisa antes de transformarse en gomitas dulces y orgullosamente chapinas.",
+      text: "La selección visual ayuda a elegir frutos con buen tamaño, color y textura.",
       image: "cosecha-img/seleccion-melones.jpg",
       alt: "Melones seleccionados por calidad",
       kicker: "Selección",
@@ -450,3 +450,4 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+
