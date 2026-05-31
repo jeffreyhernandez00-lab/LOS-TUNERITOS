@@ -220,6 +220,12 @@ function enableOrderSystem() {
       return;
     }
 
+    if (card.dataset.comingSoon === "true") {
+      addBtn.disabled = true;
+      addBtn.setAttribute("aria-disabled", "true");
+      return;
+    }
+
     addBtn.addEventListener("click", () => {
       const item = readProductData(card);
       if (!item) {
